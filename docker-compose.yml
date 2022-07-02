@@ -3,7 +3,7 @@ services:
   web:
     image: 'gitlab/gitlab-ce:latest'
     restart: unless-stopped
-    hostname: 'localhost'
+    hostname: 'git.localhost'
     container_name: gitlab-ce
     environment:
       GITLAB_OMNIBUS_CONFIG: |
@@ -21,7 +21,8 @@ services:
       - gitlab
   gitlab-runner:
     image: gitlab/gitlab-runner:alpine
-    container_name: gitlab-runner    
+    container_name: gitlab-runner
+    hostname: 'runner.git.localhost'
     restart: unless-stopped
     depends_on:
       - web
@@ -33,4 +34,5 @@ services:
 
 networks:
   gitlab:
+    external: true
     name: gitlab-network

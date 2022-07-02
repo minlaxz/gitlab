@@ -56,13 +56,13 @@ password: [root-password]
 
 ---
 
-## Register a gitlab runner:
+## Register a Gitlab Runner:
 
 ```bash
 docker exec -it gitlab-runner gitlab-runner register
 ```
 
-`gitlab-ce` is the _container_name_ of the gitlab instance - see in [compose](docker-compose.yml) file #L7
+`gitlab-ce` is the _container_name_ of the gitlab instance - see in [compose](./docker-compose.yml#L8) file #L8
 
 > host: http://gitlab-ce 
 
@@ -85,7 +85,11 @@ See the services tag in [gitlab-ci.yml](.gitlab-ci.yml)
 I am going to use dind (docker in docker) so set the image
 > docker-image: `docker:20.10.16`
 
-We are using DIND so we need to set the privileged flag
-> After registering the runner, you need to set the flag `privileged = true`
+We are using DIND so we need to set the flags 
+- privileged (runner with full access)\
+- network_mode (to see gitlab-instance from gitlab-runner DIND)
+> privileged = true
+> network_mode = "gitlab-network" see in [compose](./docker-compose.yml#L38) file #L38 [ci-file](sample-gitlab-runner.config.toml#L47)
+
 ---
 
