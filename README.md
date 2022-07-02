@@ -84,5 +84,8 @@ See the services tag in [gitlab-ci.yml](.gitlab-ci.yml)
 
 I am going to use dind (docker in docker) so set the image
 > docker-image: `docker:20.10.16`
+
+We are using DIND so we need to set the privileged flag
+> After registering the runner, you need to set the flag `privileged = true`
 ---
 
