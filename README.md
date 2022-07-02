@@ -101,6 +101,7 @@ Otherwise CI will failed like this
 
 see in [compose](./docker-compose.yml#L38) file #L38 [ci-file](sample-gitlab-runner.config.toml#L47)
 
+> After registering the runner, you need to set the var `privileged = false`
 ---
 
 Container Registry
