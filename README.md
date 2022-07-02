@@ -16,10 +16,13 @@ A self managed gitlab instance at my localhost.
 
 ---
 
-## Start the services
+## Clone and start the services
 
 ```bash
-docker-compose up -d
+git clone {this project}
+cd {this project}
+export GITLAB_HOME=$(pwd)
+docker compose up -d
 ```
 
 ### > Check the gitlab instance is healthy
@@ -86,10 +89,27 @@ I am going to use dind (docker in docker) so set the image
 > docker-image: `docker:20.10.16`
 
 We are using DIND so we need to set the flags 
-- privileged (runner with full access)\
+- privileged (runner with full access)
 - network_mode (to see gitlab-instance from gitlab-runner DIND)
-> privileged = true
-> network_mode = "gitlab-network" see in [compose](./docker-compose.yml#L38) file #L38 [ci-file](sample-gitlab-runner.config.toml#L47)
+
+Otherwise CI will failed like this
+![](./images/ci-failing.png)
+
+> `privileged = true`
+
+> `network_mode = "gitlab-network"`
+
+see in [compose](./docker-compose.yml#L38) file #L38 [ci-file](sample-gitlab-runner.config.toml#L47)
 
 ---
 
+Container Registry
+![](./images/container-registry.png)
+
+Check to login to the registry
+```bash
+docker login -u {username} -p {password} registry.git.localhost
+```
+
+CI PASSING
+![](./images/ci-pass.png)
