@@ -1,60 +1,47 @@
-A self-managed gitlab instance at my localhost.
+A self-managed gitlab instance on my laptop.
 ===
 
-> `how-I-did`.
+I was curious about how can I host a gitlab instance on my own.
 
-### > Tools
-
-- Using `docker compose` to manage the services.
-
-### > Services
+### Testing Services
 
 - GitLab Instance (of course)
 - GitLab Runner
-
-> Runner is like a machine that can run jobs.
+- GitLab CI/CD
 
 ---
 
-## Clone and start the services
+### Some Notes for me
 
+Starting point - 
 ```bash
-git clone {this project}
-cd {this project}
 export GITLAB_HOME=$(pwd)
 docker compose up -d
 ```
 
-### > Check the GitLab instance is healthy
-
+Check the GitLab instance is healthy - 
 ```bash
 docker-compose exec gitlab /bin/bash -c "gitlab-ctl status"
-
-# OR
-
-watch -n 1 docker compose ps
 ```
 
 ---
 
-## Configure the gitlab instance for the first time
+## Configuration of the gitlab instance for the first time
 
-### > Getting the root password
+### Getting the root password
 ```bash
 docker exec -it gitlab-ce cat /etc/initial_root_password
 ```
 
-### > Sign in @ [localhost]()
+### Sign in @ [git.localhost]()
 
-username: root
+username: root <br> password: ***
 
-password: [root-password]
-
-### > Change the admin credentials
+### Changing the admin credentials
 - Change the username root to something else
 - Change the password to something else
 
-### > Create a new project for whatever you want
+### Create a new project whatever
 ...
 
 ---
@@ -89,7 +76,7 @@ I am going to use dind (docker in docker) so set the image
 > docker-image: `docker:20.10.16`
 
 We are using DIND so we need to set the flags 
-- privileged (runner with full access)
+- privileged (runner will get full access to the repository)
 - network_mode (to see gitlab-instance from gitlab-runner DIND)
 
 Otherwise, CI will fail like this
