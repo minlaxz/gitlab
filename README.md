@@ -1,7 +1,7 @@
-A self managed gitlab instance at my localhost.
+A self-managed gitlab instance at my localhost.
 ===
 
-> A breifly describing of the `how-I-did`.
+> `how-I-did`.
 
 ### > Tools
 
@@ -9,8 +9,8 @@ A self managed gitlab instance at my localhost.
 
 ### > Services
 
-- Gitlab Instance (of course)
-- Gitlab Runner
+- GitLab Instance (of course)
+- GitLab Runner
 
 > Runner is like a machine that can run jobs.
 
@@ -25,7 +25,7 @@ export GITLAB_HOME=$(pwd)
 docker compose up -d
 ```
 
-### > Check the gitlab instance is healthy
+### > Check the GitLab instance is healthy
 
 ```bash
 docker-compose exec gitlab /bin/bash -c "gitlab-ctl status"
@@ -69,12 +69,12 @@ docker exec -it gitlab-runner gitlab-runner register
 
 > host: http://gitlab-ce 
 
-Two type of tokens for runners
+Two types of tokens for runners
 - Shared runner
-- Project specific runner
+- Project-specific runner
 > token: `token`
 
-> runner name: `anything`
+> Runner name: `anything`
 
 you will need to use these tags in your job stages
 > tags: `whatever` 
@@ -92,7 +92,7 @@ We are using DIND so we need to set the flags
 - privileged (runner with full access)
 - network_mode (to see gitlab-instance from gitlab-runner DIND)
 
-Otherwise CI will failed like this
+Otherwise, CI will fail like this
 ![](./images/ci-failing.png)
 
 > `privileged = true`
@@ -107,7 +107,7 @@ see in [compose](./docker-compose.yml#L38) file #L38 [ci-file](sample-gitlab-run
 Container Registry
 ![](./images/container-registry.png)
 
-Check to login to the registry
+Check to login into the registry
 ```bash
 docker login -u {username} -p {password} registry.git.localhost
 ```
